@@ -1,0 +1,20 @@
+﻿@page "/countries"
+@using BlazorProducts.Client.Components
+<div class="row">
+    <div class="col-md-10">
+        @*Place for Search and Sort*@
+    </div>
+    <div class="col-md-2">
+        <a class="btn btn-success mb-1" href="/createCountry">New Country</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <CountryTable Countries="CountryList" />
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        @*Place for Pagination*@
+    </div>
+</div>
