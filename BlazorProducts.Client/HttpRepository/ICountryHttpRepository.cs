@@ -1,10 +1,12 @@
-﻿using Entities.Models;
+﻿using BlazorProducts.Client.Features;
+using Entities.Models;
+using SharedDto.RequestFeatures;
 
 namespace BlazorProducts.Client.HttpRepository
 {
     public interface ICountryHttpRepository
     {
-        Task<List<Country>> GetCountries();
+        Task<PagingResponse<Country>> GetCountries(GeneralParameters generalParameters);
         Task<Country> GetCountryById(int id);
     }
 }
