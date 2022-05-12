@@ -17,11 +17,14 @@ namespace BlazorProducts.Client.HttpRepository
         {
             _client = httpClient;
         }
-        public async Task<PagingResponse<Country>> GetCountries(GeneralParameters generalParameters)
+        public async Task<PagingResponse<Country>> GetCountries(CountryParameters countryParameters)
         {
             var queryStringParam = new Dictionary<string, string>
             {
-                ["pageNumber"] = generalParameters.PageNumber.ToString()
+                ["pageNumber"] = countryParameters.PageNumber.ToString(),
+                ["pageSize"] = countryParameters.PageSize.ToString(),
+                ["searchTerm"] = countryParameters.SearchTerm == null ? "" : countryParameters.SearchTerm,
+                ["orderBy"] = countryParameters.OrderBy == null ? "" : countryParameters.OrderBy
             };
             var response = await _client.GetAsync(QueryHelpers.AddQueryString("countries", queryStringParam));
             var content = await response.Content.ReadAsStringAsync();

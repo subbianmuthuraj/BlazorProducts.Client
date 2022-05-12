@@ -1,8 +1,11 @@
 ﻿@page "/countries"
 @using BlazorProducts.Client.Components
 <div class="row">
-    <div class="col-md-10">
-        @*Place for Search and Sort*@
+    <div class="col-md-5">
+        <Search onSearchChanged="SearchChanged" />
+    </div>
+    <div class="col-md-5">
+        <Sort onSortChanged="SortChanged" />
     </div>
     <div class="col-md-2">
         <a class="btn btn-success mb-1" href="/createCountry">New Country</a>
@@ -16,5 +19,8 @@
 <div class="row">
     <div class="col">
         <Pagination MetaData="MetaData" Spread="1" SelectedPage="SelectedPage" />
+    </div>
+    <div class="col">
+        <PageSizeDropDown SelectedPageSize="SetPageSize" />
     </div>
 </div>

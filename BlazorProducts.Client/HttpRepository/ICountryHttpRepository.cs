@@ -6,7 +6,7 @@ namespace BlazorProducts.Client.HttpRepository
 {
     public interface ICountryHttpRepository
     {
-        Task<PagingResponse<Country>> GetCountries(GeneralParameters generalParameters);
+        Task<PagingResponse<Country>> GetCountries(CountryParameters countryParameters);
         Task<Country> GetCountryById(int id);
     }
 }
