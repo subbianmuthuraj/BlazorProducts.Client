@@ -1,7 +1,9 @@
 ﻿using BlazorProducts.Client.Features;
 using Entities.Models;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.WebUtilities;
 using SharedDto.RequestFeatures;
+using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
 
@@ -10,12 +12,14 @@ namespace BlazorProducts.Client.HttpRepository
     public class CountryHttpRepository : ICountryHttpRepository
     {
         private readonly HttpClient _client;
+        private readonly NavigationManager _navManager;
         private readonly JsonSerializerOptions _options =
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
-        public CountryHttpRepository(HttpClient httpClient)
+        public CountryHttpRepository(HttpClient httpClient, NavigationManager navManager)
         {
             _client = httpClient;
+            _navManager = navManager;
         }
         public async Task<PagingResponse<Country>> GetCountries(CountryParameters countryParameters)
         {
@@ -28,8 +32,7 @@ namespace BlazorProducts.Client.HttpRepository
             };
             var response = await _client.GetAsync(QueryHelpers.AddQueryString("countries", queryStringParam));
             var content = await response.Content.ReadAsStringAsync();
-            if (!response.IsSuccessStatusCode)
-            { throw new ApplicationException(content); }
+
             var pagingResponse = new PagingResponse<Country>
             {
                 Items = JsonSerializer.Deserialize<List<Country>>(content, _options),

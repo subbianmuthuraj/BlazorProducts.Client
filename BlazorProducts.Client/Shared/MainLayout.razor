@@ -12,7 +12,15 @@
 
         <article class="content px-4">
             <CascadingValue Name="HeadingColor" Value="@_color">
-                @Body
+
+                <ErrorBoundary @ref="errorBoundary">
+                    <ChildContent>
+                        @Body
+                    </ChildContent>
+                    <ErrorContent>
+                        <p>Something Went Wrong</p>
+                    </ErrorContent>
+                </ErrorBoundary>
             </CascadingValue>
 
         </article>
@@ -20,5 +28,10 @@
 </div>
 @code {
     private readonly string _color = "#0505b5";
+    ErrorBoundary? errorBoundary;
+    protected override void OnParametersSet()
+    {
+        errorBoundary?.Recover();
+    }
 }
 
