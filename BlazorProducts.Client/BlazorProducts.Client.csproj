@@ -23,6 +23,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\MuthurajApi\Entities\Entities.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Reference Include="Shared">
 			<HintPath>..\..\..\MuthurajApi\Shared\bin\Debug\net6.0\ref\Shared.dll</HintPath>
 		</Reference>
