@@ -8,5 +8,6 @@ namespace BlazorProducts.Client.HttpRepository
     {
         Task<PagingResponse<Country>> GetCountries(CountryParameters countryParameters);
         Task<Country> GetCountryById(int id);
+        Task CreateCountry(Country country);
     }
 }

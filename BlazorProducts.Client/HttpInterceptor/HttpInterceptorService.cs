@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.Toast.Services;
+using Microsoft.AspNetCore.Components;
 using System.Net;
 using Toolbelt.Blazor;
 
@@ -8,10 +9,13 @@ namespace BlazorProducts.Client.HttpInterceptor
     {
         private readonly HttpClientInterceptor _interceptor;
         private readonly NavigationManager _navManager;
-        public HttpInterceptorService(HttpClientInterceptor interceptor, NavigationManager navManager)
+        private readonly IToastService _toastService;
+        public HttpInterceptorService(HttpClientInterceptor interceptor, NavigationManager navManager,
+            IToastService toastService)
         {
             _interceptor = interceptor;
             _navManager = navManager;
+            _toastService = toastService;
 
         }
 
@@ -33,6 +37,10 @@ namespace BlazorProducts.Client.HttpInterceptor
                     case HttpStatusCode.NotFound:
                         _navManager.NavigateTo("/404");
                         message = "Resource Not Found.";
+                        break;
+                    case HttpStatusCode.BadRequest:
+                        message = "Invalid Request Please Try again";
+                        _toastService.ShowError(message);
                         break;
                     case HttpStatusCode.Unauthorized:
                         _navManager.NavigateTo("/unauthorized");

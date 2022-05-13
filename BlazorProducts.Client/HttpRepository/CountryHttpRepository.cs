@@ -21,6 +21,11 @@ namespace BlazorProducts.Client.HttpRepository
             _client = httpClient;
             _navManager = navManager;
         }
+
+        public async Task CreateCountry(Country country) =>
+            await _client.PostAsJsonAsync("countries", country);
+
+
         public async Task<PagingResponse<Country>> GetCountries(CountryParameters countryParameters)
         {
             var queryStringParam = new Dictionary<string, string>

@@ -10,20 +10,16 @@
             <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
         </div>
 
-        <article class="content px-4">
+        <div class="content px-4">
             <CascadingValue Name="HeadingColor" Value="@_color">
-
-                <ErrorBoundary @ref="errorBoundary">
-                    <ChildContent>
-                        @Body
-                    </ChildContent>
-                    <ErrorContent>
-                        <p>Something Went Wrong</p>
-                    </ErrorContent>
-                </ErrorBoundary>
+                @Body
             </CascadingValue>
-
-        </article>
+        </div>
+        <BlazoredToasts Position="ToastPosition.TopRight"
+                        Timeout="10"
+                        IconType="IconType.FontAwesome"
+                        SuccessIcon="fa fa-thumbs-up"
+                        ErrorIcon="fa fa-bug" />
     </main>
 </div>
 @code {
