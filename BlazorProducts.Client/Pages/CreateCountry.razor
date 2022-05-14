@@ -41,10 +41,10 @@
             <ValidationMessage For="@(() => _country.Region)" />
         </div>
     </div>
-    <div class="mb-3 row">
-        <label for="FlagSVG" class="col-md-2 col-form-label">Flag SVG:</label>
+    <div class="form-group row">
+        <label for="image" class="col-md-2 col-form-label">Image:</label>
         <div class="col-md-10">
-            <InputText id="FlagSVG" class="form-control" @bind-Value="_country.FlagSVG" />
+            <ImageUpload OnChange="AssignImageUrl" />
         </div>
     </div>
 

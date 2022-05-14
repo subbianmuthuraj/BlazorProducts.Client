@@ -25,6 +25,9 @@ namespace BlazorProducts.Client.HttpRepository
         public async Task CreateCountry(Country country) =>
             await _client.PostAsJsonAsync("countries", country);
 
+        public async Task DeleteCountry(int id)
+            => await _client.DeleteAsync(Path.Combine("countries", id.ToString()));
+
 
         public async Task<PagingResponse<Country>> GetCountries(CountryParameters countryParameters)
         {
@@ -52,6 +55,18 @@ namespace BlazorProducts.Client.HttpRepository
         {
             var country = await _client.GetFromJsonAsync<Country>($"countries/{id}");
             return country;
+        }
+
+        public async Task UpdateCountry(Country country) =>
+            await _client.PutAsJsonAsync(Path.Combine("countries", country.Id.ToString()), country);
+
+
+        public async Task<string> UploadCountryFlagImages(MultipartFormDataContent content)
+        {
+            var postResult = await _client.PostAsync("upload", content);
+            var postContent = await postResult.Content.ReadAsStringAsync();
+            var imageUrl = Path.Combine("https://localhost:5001/", postContent);
+            return imageUrl;
         }
     }
 }

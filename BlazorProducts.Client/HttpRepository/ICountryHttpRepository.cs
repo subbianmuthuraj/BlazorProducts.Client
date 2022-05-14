@@ -9,5 +9,9 @@ namespace BlazorProducts.Client.HttpRepository
         Task<PagingResponse<Country>> GetCountries(CountryParameters countryParameters);
         Task<Country> GetCountryById(int id);
         Task CreateCountry(Country country);
+        Task<string> UploadCountryFlagImages(MultipartFormDataContent content);
+
+        Task UpdateCountry(Country country);
+        Task DeleteCountry(int Id);
     }
 }

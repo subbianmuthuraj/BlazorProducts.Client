@@ -59,6 +59,8 @@ namespace BlazorProducts.Client.Pages
 
         }
 
+        private void AssignImageUrl(string imgUrl)
+            => _country.FlagSVG = imgUrl;
         public void Dispose()
         {
             Interceptor.DisposeEvent();

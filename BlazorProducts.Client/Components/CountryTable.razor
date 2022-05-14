@@ -36,12 +36,13 @@
                         @country.CountryCode3
                     </td>
                     <td class="align-middle">
-                        <button type="button" class="btn btn-info">
+                        <a class="btn btn-info" href="/updateCountry/@country.Id">
                             Update
-                        </button>
+                        </a>
                     </td>
-                    <td>
-                        <button type="button" class="btn btn-danger">
+                    <td class="align-middle">
+                        <button type="button" class="btn btn-danger"
+                        @onclick="() => CallConfirmationModel(country.Id)">
                             Delete
                         </button>
                     </td>
@@ -49,6 +50,8 @@
             }
         </tbody>
     </table>
+    <Confirmation BodyMessage="Do you Want to Delete this Country?"
+              OnOKClicked="DeleteCountry" @ref="_confirmation" />
 }
 else
 {

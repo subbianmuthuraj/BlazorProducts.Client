@@ -58,6 +58,14 @@ namespace BlazorProducts.Client.Pages
             await GetCountries();
         }
 
+        private async Task DeleteCountry(int Id)
+        {
+            await CountryRepo.DeleteCountry(Id);
+            if (countryParameters.PageNumber > 1 && CountryList.Count == 1)
+                countryParameters.PageNumber--;
+
+            await GetCountries();
+        }
         public void Dispose() => Interceptor.DisposeEvent();
     }
 }
