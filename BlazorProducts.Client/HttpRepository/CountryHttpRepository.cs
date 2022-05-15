@@ -1,4 +1,5 @@
 ﻿using BlazorProducts.Client.Features;
+using Entities.ConfigurationModels;
 using Entities.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.WebUtilities;
@@ -13,13 +14,15 @@ namespace BlazorProducts.Client.HttpRepository
     {
         private readonly HttpClient _client;
         private readonly NavigationManager _navManager;
+        private readonly ApiConfiguration _apiconfiguration;
         private readonly JsonSerializerOptions _options =
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
-        public CountryHttpRepository(HttpClient httpClient, NavigationManager navManager)
+        public CountryHttpRepository(HttpClient httpClient, NavigationManager navManager, IConfiguration configuration)
         {
             _client = httpClient;
             _navManager = navManager;
+            configuration.Bind("ApiConfiguration", _apiconfiguration);
         }
 
         public async Task CreateCountry(Country country) =>
@@ -65,7 +68,8 @@ namespace BlazorProducts.Client.HttpRepository
         {
             var postResult = await _client.PostAsync("upload", content);
             var postContent = await postResult.Content.ReadAsStringAsync();
-            var imageUrl = Path.Combine("https://localhost:5001/", postContent);
+
+            var imageUrl = Path.Combine(_apiconfiguration.BaseAddress, postContent);
             return imageUrl;
         }
     }
